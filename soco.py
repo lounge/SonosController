@@ -337,7 +337,7 @@ class SoCo(object):
 
             return int(volume)
 
-    def bass(self, bass=False):
+    def bass(self, bass=''):
         """ Get or set the Sonos speaker's bass EQ.
 
         Arguments:
@@ -354,7 +354,7 @@ class SoCo(object):
         speaker will be returned.
         
         """
-        if bass:
+        if bass != '':
             action = '"urn:schemas-upnp-org:service:RenderingControl:1#SetBass"'
 
             body = '<u:SetBass xmlns:u="urn:schemas-upnp-org:service:RenderingControl:1"><InstanceID>0</InstanceID><DesiredBass>' + repr(bass) + '</DesiredBass></u:SetBass>'

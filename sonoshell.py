@@ -8,14 +8,18 @@ if __name__ == '__main__':
     if (len(sys.argv) < 3):
         print "Usage: sonoshell.py [speaker's IP] [cmd]"
         print ""
-        print "Valid commands: play, pause, stop, next, previous, and info"
+        print "Valid commands: play, pause, stop, volume, next, previous, and info"
         sys.exit()
 
     speaker_ip = sys.argv[1]
     cmd = sys.argv[2].lower()
+    param1 = ''
+    param2 = ''
 
     if (len(sys.argv) > 3):
-        param1 = sys.argv[3].lower()
+        param1 = sys.argv[3]
+    if (len(sys.argv) > 4):
+        param2 = sys.argv[4]
 
     sonos = SoCo(speaker_ip)
 
@@ -23,6 +27,25 @@ if __name__ == '__main__':
         print sonos.play()
     elif (cmd == 'pause'):
         print sonos.pause()
+    elif (cmd == 'volume'):
+        if(param1 != ''):
+            print param1
+            sonos.volume(int(param1))
+        else:
+            print sonos.volume()
+    elif (cmd == 'eq'):
+        if(param1 == 'bass'):
+            if(param2 != ''):
+                sonos.bass(int(param2))
+            else:
+                print sonos.bass()
+        elif(param1 == 'treble'):
+            if(param2 != ''):
+                sonos.treble(int(param2))
+            else:
+                print sonos.treble()
+        else:
+            print 'Usage: sonoshell.py [speaker\'s IP] eq [bass|treble]'
     elif (cmd == 'stop'):
         print sonos.stop()
     elif (cmd == 'next'):
