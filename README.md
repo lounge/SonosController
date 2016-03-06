@@ -74,7 +74,7 @@ Pause the sound reproduction
 ### volume [0-100]
 Passing the command without a parameter will return the current volume, otherwise it will set it to the one specified  
 ### eq bass|treble [-10 - 10]
-Get / Set the equalizer, see the [Sample](#Sample) above  
+Get / Set the equalizer, see the [EQ sample](#eq) above  
 ### led 0|1
 Set the LED status  
 ### next
