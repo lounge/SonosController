@@ -1,14 +1,22 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import sys
 
 from soco import SoCo
 
+v_commands = ['play', 'pause', 'stop', 'volume', 'next', 'previous', 'info']
+version = '1.0.0'
+
 if __name__ == '__main__':
+    if(len(sys.argv) > 1 and sys.argv[1] == '-v'):
+        print version
+        sys.exit()
+
     if (len(sys.argv) < 3):
-        print "Usage: sonoshell.py [speaker's IP] [cmd]"
+        print 'Sonoshell - version '+version
+        print "Usage: sonoshell.py [-v|] [speaker's IP] [cmd]"
         print ""
-        print "Valid commands: play, pause, stop, volume, next, previous, and info"
+        print "Valid commands: " + ', '.join(v_commands)
         sys.exit()
 
     speaker_ip = sys.argv[1]
