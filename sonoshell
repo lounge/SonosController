@@ -1,14 +1,23 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import sys
 
 from soco import SoCo
 
+v_commands = ['play', 'pause', 'stop', 'volume', 'eq', 'led', 'next', 'previous', 'info']
+version = '1.0.1'
+usage_shell = 'sonoshell [ip]'
+
 if __name__ == '__main__':
+    if(len(sys.argv) > 1 and sys.argv[1] == '-v'):
+        print version
+        sys.exit()
+
     if (len(sys.argv) < 3):
-        print "Usage: sonoshell.py [speaker's IP] [cmd]"
+        print 'Sonoshell - version '+version
+        print "Usage: sonoshell [-v|] [speaker's IP] [cmd]"
         print ""
-        print "Valid commands: play, pause, stop, volume, next, previous, and info"
+        print "Valid commands: " + ', '.join(v_commands)
         sys.exit()
 
     speaker_ip = sys.argv[1]
@@ -24,6 +33,8 @@ if __name__ == '__main__':
     sonos = SoCo(speaker_ip)
 
     if (cmd == 'play'):
+        if(param1 != ''):
+            sonos.play(param1)
         print sonos.play()
     elif (cmd == 'pause'):
         print sonos.pause()
@@ -45,7 +56,7 @@ if __name__ == '__main__':
             else:
                 print sonos.treble()
         else:
-            print 'Usage: sonoshell.py [speaker\'s IP] eq [bass|treble]'
+            print 'Usage: ' + usage_shell +' eq [bass|treble]'
     elif (cmd == 'stop'):
         print sonos.stop()
     elif (cmd == 'next'):
@@ -56,9 +67,18 @@ if __name__ == '__main__':
         print sonos.start_playlist()
     elif (cmd == 'set_playmode'):
         print sonos.set_playmode()
+    elif (cmd == 'led'):
+        if(param1 == '1' or param1 == '0'):
+            if(param1 == '1'):
+                sonos.status_light(True)
+            else:
+                sonos.status_light(False)
+        else:
+            print usage_shell + ' led 0|1'
     elif (cmd == 'info'):
         track = sonos.get_current_track_info()
-
-        print 'Artist: ' + track['artist'] + ', Current track:  ' + track['title'] + ', From album: ' + track['album'] + ', This is track number: ' + track['playlist_position'] + ' in the playlist. It is ' + track['duration'] + ' minutes long.'
+        print track
+        #print 'Artist: ' + track['artist'] + ', Current track:  ' + track['title'] + ', From album: ' + track['album'] + ', This is track number: ' + track['playlist_position'] + ' in the playlist. It is ' + track['duration'] + ' minutes long.'
     else:
-        print "Valid commands: play, pause, stop, next, previous, and info"
+        print "Unknown command \"" + cmd + "\""
+        print "Valid commands: " + ', '.join(v_commands)
