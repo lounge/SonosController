@@ -13,9 +13,9 @@ for example, to set the volume to 60% one can issue this simple command
 ### Play
 If you already have something in your play queue you could simply issue:  
 ```bash
-./sonoshell 192.168.1.162 play https://app.box.com/shared/static/lhtefwqwo6070tj8g5cq.mp3
+./sonoshell 192.168.1.162 play https://192.168.1.162/lhtefwqwo6070tj8g5cq.mp3
 ```
-where obviously `https://app.box.com/shared/static/lhtefwqwo6070tj8g5cq.mp3` is your file URL
+where obviously `https://192.168.1.162/lhtefwqwo6070tj8g5cq.mp3` is your file URL
 
 #### Radio  
 In order to play a streamable URL it must me prepended with some protocol specifications,
